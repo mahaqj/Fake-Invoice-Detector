@@ -28,7 +28,7 @@ Correct format of invoice matches the images of invoices from https://www.kaggle
 
 ```bash
 # 1. Install dependencies
-pip install flask pillow pytesseract
+pip install flask pillow pytesseract opencv-python
 
 # 2. Make sure Tesseract-OCR is installed and added to PATH
 
@@ -44,7 +44,7 @@ Then open:
 ## Web App Usage Flow
 
 1. Upload invoice image
-2. App runs OCR and extracts fields
+2. App matches template, runs OCR and extracts fields
 3. Result is shown:
    - Extracted fields
    - Invoice status (Original or Fake)
@@ -62,6 +62,7 @@ Output:
 
 ## Tech Stack
 
+- **Image Processing**: OpenCV
 - **Backend**: Python + Flask
 - **OCR**: Tesseract (via pytesseract)
 - **Frontend**: HTML + CSS
