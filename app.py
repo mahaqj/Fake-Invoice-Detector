@@ -6,16 +6,30 @@ import hashlib
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
+# @app.route("/", methods=["GET", "POST"])
+# def index():
+#     result = None
+#     fields = {}
+#     if request.method == "POST":
+#         file = request.files['invoice']
+#         if file:
+#             filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+#             file.save(filepath)
+#             fields, result = check_invoice(filepath) # run ocr
+#     return render_template("index.html", fields=fields, result=result)
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     result = None
     fields = {}
     if request.method == "POST":
-        file = request.files['invoice']
-        if file:
+        file = request.files.get('invoice')
+        if file and file.filename:  # <--- check that a file is selected
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
             file.save(filepath)
-            fields, result = check_invoice(filepath) # run ocr
+            fields, result = check_invoice(filepath)
+        else:
+            result = "Please select a file before submitting."
     return render_template("index.html", fields=fields, result=result)
 
 @app.route("/upload_original", methods=["POST"])
@@ -34,7 +48,6 @@ def upload_original():
             f.write(sha256 + "\n")
 
     return "Original invoice added successfully! <a href='/'>Back</a>"
-
 
 if __name__ == "__main__":
     app.run(debug=True)

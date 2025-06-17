@@ -10,15 +10,14 @@
     </style>
 </head>
 <body>
-    <h1>Fake Invoice Detector</h1>
-
-    <h2>Upload Original Invoice</h2>
+    <h1>Upload Original Invoice</h1>
     <form method="POST" enctype="multipart/form-data" action="/upload_original">
         <input type="file" name="original_invoice" required>
         <input type="submit" value="Add Original Invoice">
     </form>
     <hr>
     
+    <h1>Fake Invoice Detector</h1>
     <form method="POST" enctype="multipart/form-data">
         <input type="file" name="invoice" required>
         <button type="submit">Analyze Invoice</button>
