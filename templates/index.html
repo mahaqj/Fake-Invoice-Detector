@@ -11,6 +11,13 @@
 </head>
 <body>
     <h1>Fake Invoice Detector</h1>
+
+    <h2>Upload Original Invoice</h2>
+    <form method="POST" enctype="multipart/form-data" action="/upload_original">
+        <input type="file" name="original_invoice" required>
+        <input type="submit" value="Add Original Invoice">
+    </form>
+    <hr>
     
     <form method="POST" enctype="multipart/form-data">
         <input type="file" name="invoice" required>
@@ -19,7 +26,6 @@
 
     {% if result %}
         {% if fields and fields|length > 0 and fields.values() | select('ne', 'not found') | list %}
-            <h2>Extracted Fields:</h2>
             <ul>
                 {% for key, value in fields.items() %}
                     <li><strong>{{ key }}:</strong> {{ value }}</li>
