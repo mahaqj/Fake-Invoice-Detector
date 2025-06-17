@@ -21,10 +21,16 @@ def check_invoice(image_path):
     # extract fields using regex
     invoice_no = re.search(r'Invoice\s*no[:\-]?\s*(\d+)', text, re.IGNORECASE)
     date = re.search(r'Date\s*.*[:\-]?\s*(\d{2}/\d{2}/\d{4})', text, re.IGNORECASE)
-
-    #date = re.search(r'Date\s*of\s*issue[:\-]?\s*(\d{2}/\d{2}/\d{4})', text, re.IGNORECASE)
+    if not date:
+        lines = text.split('\n')
+        for i, line in enumerate(lines):
+            if line.strip().lower() == "total":
+                if i + 2 < len(lines):
+                    match = re.search(r'(\d{2}/\d{2}/\d{4})', text, re.IGNORECASE)
+                    if match:
+                        date = match
+                break
     iban = re.search(r'IBAN[:\-]?\s*([A-Z0-9]+)', text, re.IGNORECASE)
-    seller_tax = re.search(r'Tax\s*Id[:\-]?\s*(\d{3}-\d{2}-\d{4})', text)
     client_tax = re.findall(r'Tax\s*Id[:\-]?\s*(\d{3}-\d{2}-\d{4})', text)
     if len(client_tax) >= 2:
         seller_tax_id, client_tax_id = client_tax[0], client_tax[1]
