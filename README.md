@@ -1,6 +1,6 @@
 # Fake Invoice Detector
 
-This is a simple web application that detects whether an invoice is **original or fake** using **Tesseract OCR** and comparing layout and **OpenCV**.
+This is a simple web application that detects whether an invoice is **original or fake** using **Tesseract OCR** and **OpenCV**.
 
 ---
 
