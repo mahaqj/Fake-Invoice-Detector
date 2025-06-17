@@ -6,13 +6,14 @@ This is a simple web application that detects whether an invoice is **original o
 
 ## How it Works
 
-1. Extracts text from invoice images using **Tesseract OCR**
-2. Uses **regular expressions** to extract key fields:
+1. Performs template matching using **OpenCV**
+2. Extracts text from invoice images using **Tesseract OCR**
+3. Uses **regular expressions** to extract key fields:
    - Invoice Number
    - Date of Issue
    - IBAN
    - Seller and Client Tax IDs
-3. Classifies invoice as:
+4. Classifies invoice as:
    - **Original** -> if layout matches and all fields are found
    - **Fake** -> if layout mismatches or key fields are missing
 
