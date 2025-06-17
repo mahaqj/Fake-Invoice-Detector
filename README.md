@@ -42,7 +42,7 @@ pip install -r requirements.txt
 1. **Analyze Invoice**:
     - Extracts text from uploaded invoice using Tesseract OCR
     - Computes SHA256 hash of the text
-    - Checks if this hash matches any known original invoice's hash and further uses OpenCV template matching and field presence to classify the invoice label
+    - Checks if this hash matches any known original invoice's hash and further uses template matching and field presence to classify the invoice
 
 2. **Add Original Invoice**:
     - User uploads an original invoice image
