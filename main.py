@@ -1,4 +1,4 @@
-# project: fake invoice detector using computer vision
+# project: fake invoice detector using tesseract ocr
 
 # considering original invoice format from this dataset:
 # https://www.kaggle.com/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr
@@ -9,10 +9,14 @@
 from PIL import Image
 import pytesseract
 import re
+import cv2
 
 pytesseract.pytesseract.tesseract_cmd = r"C:\Users\mahaq\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
 
 def check_invoice(image_path):
+    if not match_template(image_path):
+        return {}, "Fake Invoice (layout mismatch)"
+    
     image = Image.open(image_path).convert("L")
     text = pytesseract.image_to_string(image)
 
@@ -58,3 +62,19 @@ def check_invoice(image_path):
         result = "Original Invoice"
 
     return fields, result
+
+def match_template(input_path, template_path="template.jpg", threshold=0.4): # dataset images match 0.4 and above
+    input_img = cv2.imread(input_path, cv2.IMREAD_GRAYSCALE)
+    template_img = cv2.imread(template_path, cv2.IMREAD_GRAYSCALE)
+
+    if input_img is None or template_img is None:
+        print("error: one or both images could not be loaded properly :(")
+        return False
+    
+    # template match
+    result = cv2.matchTemplate(input_img, template_img, cv2.TM_CCOEFF_NORMED)
+    _, max_val, _, _ = cv2.minMaxLoc(result)
+
+    print(f"layout similarity score: {max_val:.3f}")
+
+    return max_val >= threshold
