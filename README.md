@@ -33,7 +33,10 @@ pip install flask pillow pytesseract opencv-python
 
 # 2. Make sure Tesseract-OCR is installed and added to PATH
 
-# 3. Run the Flask app
+# 3. Edit this path to reflect where tesseract.exe is located on your computer
+pytesseract.pytesseract.tesseract_cmd = r"C:\Users\mahaq\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
+
+# 4. Run the Flask app
 python app.py
 ```
 
