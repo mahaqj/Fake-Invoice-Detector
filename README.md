@@ -77,10 +77,3 @@ python app.py
 
 
 ---
-
-## 📌 Notes
-
-- Template matching threshold is set to `0.4`.
-- SHA256 is used to verify exact matches to known originals.
-
----
