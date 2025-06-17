@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fake Invoice Detector</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        .field { margin-bottom: 10px; }
+        .result { font-weight: bold; color: green; }
+        .fake { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Fake Invoice Detector</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="invoice" required>
+        <button type="submit">Analyze Invoice</button>
+    </form>
+
+    {% if fields %}
+        <h2>Extracted Fields:</h2>
+        <ul>
+            {% for key, value in fields.items() %}
+                <li><strong>{{ key }}:</strong> {{ value }}</li>
+            {% endfor %}
+        </ul>
+        <p class="{% if result == 'Fake Invoice' %}fake{% else %}result{% endif %}">{{ result }}</p>
+    {% endif %}
+</body>
+</html>
