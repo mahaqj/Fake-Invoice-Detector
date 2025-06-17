@@ -74,6 +74,9 @@ python app.py
 
 ## Example Results
 
+Original Invoice Image:
+![batch1-0001](https://github.com/user-attachments/assets/3eb94626-225b-46d2-a528-a0d9156a771d)
+![Screenshot 2025-06-17 160946](https://github.com/user-attachments/assets/57cf16ff-b3df-4483-b76e-989cb1c26cf7)
 
 
 ---
